@@ -15,7 +15,7 @@ class Gancho extends Component {
       <div className='container'>
         <h1>Contador: {this.state.count}</h1>
         <button
-          className='btn btn-primary'
+ className='btn btn-primary'         
          onClick={() => this.handleIncrement()}>
             Incrementar         
          </button>

@@ -1,0 +1,37 @@
+
+{
+  "usuarios": [
+    {
+      "id": 1,
+      "nome": "João da Silva",
+      "email": "joao.silva@example.com",
+      "idade": 25
+    },
+    {
+      "id": 2,
+      "nome": "Maria Oliveira",
+      "email": "maria.oliveira@example.com",
+      "idade": 32
+    },
+    {
+      "id": 3,
+      "nome": "Pedro Santos",
+      "email": "pedro.santos@example.com",
+      "idade": 28
+    },
+    {
+      "id": 4,
+      "nome": "Ana Pereira",
+      "email": "ana.pereira@example.com",
+      "idade": 20
+    },
+    { 
+        "id": 5, 
+        "nome": "Paulo Jesus", 
+        "email": "paulo.jesus@example.com", 
+        "idade": 21 
+    }
+  ]
+}
+
+    
