@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Exemplo de formulário com JavaScript</title>
+  </head>
+  <body>
+    <form>
+      <label>
+        Nome:
+        <input type="text" id="nome" name="nome" required>
+      </label>
+      <br>
+      <label>
+        Email:
+        <input type="email" id="email" name="email" required>
+      </label>
+      <br>
+      <button type="submit">Enviar</button>
+    </form>
+
+    <script>
+      const form = document.querySelector('form');
+      const nome = document.querySelector('#nome');
+      const email = document.querySelector('#email');
+
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        console.log('Nome:', nome.value);
+        console.log('Email:', email.value);
+      });
+    </script>
+  </body>
+</html>

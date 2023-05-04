@@ -1,0 +1,1 @@
+export const imagemCao = "https://image.shutterstock.com/image-photo/pure-youth-crazy-english-cocker-260nw-1424153078.jpg";

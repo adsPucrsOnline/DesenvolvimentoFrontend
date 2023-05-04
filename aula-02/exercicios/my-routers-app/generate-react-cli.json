@@ -1,0 +1,14 @@
+{
+  "usesTypeScript": false,
+  "usesStyledComponents": true,
+  "testLibrary": "Testing Library",
+  "component": {
+    "default": {
+      "path": "src/components",
+      "withStyle": false,
+      "withTest": false,
+      "withStory": false,
+      "withLazy": false
+    }
+  }
+}
