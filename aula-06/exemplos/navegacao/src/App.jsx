@@ -4,24 +4,21 @@ import Home from './Home';
 import About from './About';
 import Products from './Products';
 import Contact from './Contact';
-import NavigationMenu from './components/navigationMenu/navigationMenu';
-import Navigation from './components/navigation/navigation';
-import ProgressBar from './components/progressbar/progressbar';
-import NavigationTrail from './components/NavigationTrail/navigationTrail';
+import NavigationProducts from './components/navigationProducts/navigationProducts';
+import Breadcrumbs from './components/breadcrumbs/breadcrumbs';
 
 function App() {
   return (
     <Router>
       <div>
-        <NavigationMenu />
-        <NavigationTrail />
+        <NavigationProducts />
+        <Breadcrumbs />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/products/:id" element={<Products />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-
       </div>
     </Router>
   );

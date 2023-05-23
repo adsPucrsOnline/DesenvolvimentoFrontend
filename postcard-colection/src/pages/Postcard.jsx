@@ -1,11 +1,11 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function Products() {
+function Postcard() {
 
   const { id } = useParams();
 
-  return <h1>Products  {id} </h1>;
+  return <h1>Cartão Postal  {id} </h1>;
 }
 
-export default Products;
+export default Postcard;
