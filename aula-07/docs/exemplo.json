@@ -1,0 +1,10 @@
+{
+    "nome": "João",
+    "idade": 30,
+    "email": "joao@example.com",
+    "frutas-preferidas": [
+        "maçã",
+        "laranja",
+        "banana"
+    ]
+}
