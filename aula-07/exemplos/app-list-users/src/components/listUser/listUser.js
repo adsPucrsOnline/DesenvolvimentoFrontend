@@ -8,6 +8,7 @@ const ListUser = () => {
   const { data, loading, error } = useApi('https://jsonplaceholder.typicode.com/users');
 
   if (loading) {
+    console.log(data.user);
     return <CircularProgress />;
   }
 

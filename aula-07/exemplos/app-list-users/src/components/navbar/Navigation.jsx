@@ -22,7 +22,7 @@ const Navigation = () => {
   });
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <IconButton
           edge="start"

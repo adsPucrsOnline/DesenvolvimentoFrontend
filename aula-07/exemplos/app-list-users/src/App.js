@@ -5,6 +5,7 @@ import {  Container } from '@mui/material';
 import Home from './pages/Home';
 import Usuario from './pages/Usuario';
 import Navigation from './components/navbar/Navigation';
+import UserEditPage from './pages/UsuarioEdicao';
 
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
         <Routes>
           <Route path="/usuario" element={<Usuario />} />
           <Route path="/" element={<Home />} />
+          <Route path='/usuario/editar/:id' element={<UserEditPage/>}/>
         </Routes>
       </Container>
     </div>
