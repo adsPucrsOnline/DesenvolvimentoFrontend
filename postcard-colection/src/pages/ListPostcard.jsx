@@ -5,7 +5,9 @@ import { Box, Card, CardContent } from '@mui/material';
 import { Typography, CircularProgress } from '@mui/material';
 
 function ListPostcard() {
-    const { postcards, loading, error } = usePostcards();
+    const { data, loading, error } = usePostcards(
+      `http://localhost:5000/postcards`
+    );
     
     if (loading) {
       return <CircularProgress />;
@@ -17,7 +19,7 @@ function ListPostcard() {
   
     return (
       <Box marginTop={8}> 
-      {postcards.map((postcard) => (      
+      {data.map((postcard) => (      
         <Card key={postcard.id} sx={{ display: 'flex', alignItems: 'center', mb: 1, pl: 2  }}>
           <Box sx={{ width: '20%', height: '25%', backgroundColor: '#e0e0e0', mr: 2 }}>
             <img src={postcard.imageUrl} alt={postcard.name}  />
@@ -35,13 +37,4 @@ function ListPostcard() {
     );
   }
 
-//   <div>
-//   <h2>List Postcards</h2>
-//   {postcards.map((postcard) => (
-//     <div key={postcard.id}>
-//       <h3>{postcard.name}</h3>
-//       <img src={postcard.imageUrl} alt={postcard.name} />
-//     </div>
-//   ))}
-// </div>
 export default ListPostcard;

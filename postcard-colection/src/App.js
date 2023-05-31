@@ -10,15 +10,15 @@ import Postcard from './pages/Postcard';
 
 function App() {
   return (
-<Router>
+    <Router>
       <div>
         <Navigation />
         <Container maxWidth="md">
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/list" element={<ListPostcard />} />
-          <Route path="/postcard/:id" element={<Postcard />} />
-        </Routes>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/list" element={<ListPostcard />} />
+            <Route path="/postcard/:id" element={<Postcard />} />
+          </Routes>
         </Container>
       </div>
     </Router>

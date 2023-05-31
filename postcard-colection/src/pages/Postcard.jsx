@@ -1,17 +1,15 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+import { Box } from '@mui/material';
+import PostcardEdit from '../components/PostcardEdit/PostcardEdit';
 
-import { Box, Card, Typography } from '@mui/material';
-
-
-const Postcard = () => {
+const Postcard = ({ postcards }) => {
   const { id } = useParams();
 
   return (
-    <Box marginTop={16}> 
-      <Card sx={{ alignItems: 'center', mb: 0, pl: 10 }}>
-        <Typography variant="h3">Postcar {id} </Typography>
-      </Card>
+    <Box marginTop={8}>
+      <h1>Edição de Postcard</h1>
+      <PostcardEdit postcard={postcards} />
     </Box>
   );
 };

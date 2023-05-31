@@ -22,6 +22,26 @@ app.get('/postcards', (req, res) => {
   });
 });
 
+// Rota GET para obter um único Postcard pelo ID
+app.get('/postcards/:id', (req, res) => {
+  const postId = req.params.id;
+
+  fs.readFile(postcardsPath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to read postcards data.' });
+    }
+
+    const postcards = JSON.parse(data);
+    const postcard = postcards.find((post) => post.id === postId);
+
+    if (!postcard) {
+      return res.status(404).json({ error: 'Postcard not found.' });
+    }
+
+    res.json(postcard);
+  });
+});
 // Rota POST para adicionar um novo Postcard
 app.post('/postcards', (req, res) => {
   const { name, cidade, pais, descricao } = req.body;

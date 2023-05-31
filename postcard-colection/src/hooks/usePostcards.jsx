@@ -1,30 +1,28 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 
-function usePostcards() {
-  const [postcards, setPostcards] = useState([]);
+const usePostcards = (url) => {
+  const [data, setData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    async function fetchPostcards() {
+    const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/postcards');
-        if (!response.ok) {
-          throw new Error('Failed to fetch postcards');
-        }
-        const data = await response.json();
-        setPostcards(data);
+        const response = await axios.get(url);
+        console.log(response)
+;        setData(response.data);
         setLoading(false);
       } catch (error) {
-        setError(error.message);
+        setError('Erro ao carregar os dados');
         setLoading(false);
       }
-    }
+    };
 
-    fetchPostcards();
-  }, []);
+    fetchData();
+  }, [url]);
 
-  return { postcards, loading, error };
+  return { data, loading, error };
 }
 
 export default usePostcards;
