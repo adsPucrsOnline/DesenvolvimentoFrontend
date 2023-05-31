@@ -8,7 +8,7 @@ function usePostcards() {
   useEffect(() => {
     async function fetchPostcards() {
       try {
-        const response = await fetch('https://api.example.com/postcards');
+        const response = await fetch('http://localhost:5000/postcards');
         if (!response.ok) {
           throw new Error('Failed to fetch postcards');
         }

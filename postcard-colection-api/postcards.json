@@ -1,0 +1,27 @@
+[
+    {
+      "id": "1",
+      "name": "Postcard 1",
+      "cidade": "Cidade 1",
+      "pais": "País 1",
+      "descricao": "Descrição do Postcard 1",
+      "imageUrl": "https://picsum.photos/400/300"
+    },
+    {
+      "id": "2",
+      "name": "Postcard 2",
+      "cidade": "Cidade 2",
+      "pais": "País 2",
+      "descricao": "Descrição do Postcard 2",
+      "imageUrl": "https://picsum.photos/400/300"
+    },
+    {
+      "id": "3",
+      "name": "Postcard 3",
+      "cidade": "Cidade 3",
+      "pais": "País 3",
+      "descricao": "Descrição do Postcard 3",
+      "imageUrl": "https://picsum.photos/400/300"
+    }
+  ]
+  

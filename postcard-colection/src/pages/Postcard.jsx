@@ -1,11 +1,19 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-function Postcard() {
+import { Box, Card, Typography } from '@mui/material';
 
+
+const Postcard = () => {
   const { id } = useParams();
 
-  return <h1>Cartão Postal  {id} </h1>;
-}
+  return (
+    <Box marginTop={16}> 
+      <Card sx={{ alignItems: 'center', mb: 0, pl: 10 }}>
+        <Typography variant="h3">Postcar {id} </Typography>
+      </Card>
+    </Box>
+  );
+};
 
 export default Postcard;
