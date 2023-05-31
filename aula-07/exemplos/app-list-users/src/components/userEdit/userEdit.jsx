@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import useApi from '../../hooks/useApi';
-import { Box, TextField, Button } from '@mui/material';
-import { Typography, CircularProgress } from '@mui/material';
+import React, { useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import useApi from "../../hooks/useApi";
+import { Box, TextField, Button } from "@mui/material";
+import { Typography, CircularProgress } from "@mui/material";
 
 const UserEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-const [isSaved, setIsSaved] = useState(false);
-  const { data, loading, error } = useApi('https://jsonplaceholder.typicode.com/users/'+parseInt(id));
+  const [isSaved, setIsSaved] = useState(false);
+  const { data, loading, error } = useApi(
+    "https://jsonplaceholder.typicode.com/users/" + parseInt(id)
+  );
 
   const [user, setUser] = useState(data);
 
@@ -20,7 +22,6 @@ const [isSaved, setIsSaved] = useState(false);
     return <Typography variant="body1">{error}</Typography>;
   }
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUser((prevState) => ({
@@ -31,9 +32,8 @@ const [isSaved, setIsSaved] = useState(false);
 
   const handleSaveClick = () => {
     setIsSaved(true);
-    navigate('/usuario');
+    navigate("/usuario");
   };
-
 
   if (!user) {
     return <Typography variant="body1">Usuário não encontrado.</Typography>;
