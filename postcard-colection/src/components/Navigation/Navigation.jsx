@@ -45,6 +45,9 @@ const Navigation = () => {
               <ListItem button onClick={handleDrawerClose}  component={Link} to="/list"> 
                 <ListItemText primary="Lista de PostCards" />
               </ListItem>
+              <ListItem button onClick={handleDrawerClose}  component={Link} to="/addpostcard"> 
+                <ListItemText primary="Inclusão de PostCards" />
+              </ListItem>
             </List>
           </DrawerContainer>
         </Drawer>

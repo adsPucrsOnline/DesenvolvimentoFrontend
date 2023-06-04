@@ -4,23 +4,23 @@ import usePostcards from "../../hooks/usePostcards";
 import { Box, TextField, Button, Card, CardMedia } from "@mui/material";
 import { Typography, CircularProgress } from "@mui/material";
 
-const PostcardEdit = () => {
-  const { id } = useParams();
+const PostcardAdd = () => {
+  //const { id } = useParams();
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
   const { data, loading, error } = usePostcards(
-    `http://localhost:5000/postcards/${parseInt(id)}`
+      `http://localhost:5000/postcards/1`
   );
 
   const [postcard, setPostcard] = useState(data);
 
-  if (loading) {
-    console.log(data, loading)
-    return <CircularProgress />;
-  }
+   if (loading) {
+     console.log(data, loading)
+     return <CircularProgress />;
+   }
 
-  if (error) {
-    return <Typography variant="body1">{error}</Typography>;
+   if (error) {
+     return <Typography variant="body1">{error}</Typography>;
   }
 
   const handleInputChange = (e) => {
@@ -36,19 +36,17 @@ const PostcardEdit = () => {
     navigate("/list");
   };
 
-  if (!postcard) {
-    return <Typography variant="body1">Postcard não encontrado.</Typography>;
-  }
+
 
   return (
     <Box marginTop={1}>
       <form>
-      {postcard && (
+  
         <>
         <TextField
           label="Nome"
           name="name"
-          value={data.name}
+          value={postcard.name}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
@@ -56,7 +54,7 @@ const PostcardEdit = () => {
         <TextField
           label="Cidade"
           name="cidade"
-          value={data.cidade}
+          value={postcard.cidade}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
@@ -64,7 +62,7 @@ const PostcardEdit = () => {
         <TextField
           label="País"
           name="pais"
-          value={data.pais}
+          value={postcard.pais}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
@@ -72,30 +70,21 @@ const PostcardEdit = () => {
         <TextField
           label="Descrição"
           name="descricao"
-          value={data.descricao}
+          value={postcard.descricao}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
         />
-        {/* <TextField
+       <TextField
           label="Imagem URL"
           name="imageUrl"
-          value={data.imageUrl}
+          value={postcard.imageUrl}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
-        /> */}
-      <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={data.imageUrl}
-        title={data.name}
-      />
-    </Card>
-  
-
+        /> 
        </>
-        )}
+
         <Button variant="contained" color="primary" onClick={handleSaveClick}>
           Salvar
         </Button>
@@ -105,4 +94,4 @@ const PostcardEdit = () => {
   );
 };
 
-export default PostcardEdit;
+export default PostcardAdd;

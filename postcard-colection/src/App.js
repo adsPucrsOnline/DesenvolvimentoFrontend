@@ -7,6 +7,7 @@ import Navigation from './components/Navigation/Navigation';
 import Home from './pages/Home';
 import ListPostcard from './pages/ListPostcard';
 import Postcard from './pages/Postcard';
+import AddPostcard from './pages/AddPostcard';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/list" element={<ListPostcard />} />
+            <Route path='/addpostcard' element={<AddPostcard />} />
             <Route path="/postcard/:id" element={<Postcard />} />
           </Routes>
         </Container>
