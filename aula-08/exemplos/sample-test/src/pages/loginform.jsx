@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import { TextField, Button, Typography } from '@mui/material';
+import React, { useState } from "react";
+import { TextField, Button, Typography } from "@mui/material";
 
 const LoginForm = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -17,19 +17,18 @@ const LoginForm = () => {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     // Simulação de validação do login
-    if (username === 'myusername' && password === 'mypassword') {
-        // Login bem-sucedido, redirecionar para a página de dashboard
-        window.location.href = '/home';
-      } else {
-        // Credenciais inválidas, exibir mensagem de erro
-        setErrorMessage('Invalid credentials');
-      }
-    };
-  
+    if (username === "myusername" && password === "mypassword") {
+      // Login bem-sucedido, redirecionar para a página de dashboard
+      window.location.href = "/home";
+    } else {
+      // Credenciais inválidas, exibir mensagem de erro
+      setErrorMessage("Invalid credentials");
+    }
+  };
 
   return (
     <form onSubmit={handleFormSubmit}>
-      <Typography variant='h4'>Login </Typography>
+      <Typography variant="h4">Login </Typography>
       <TextField
         name="username"
         label="Username"
