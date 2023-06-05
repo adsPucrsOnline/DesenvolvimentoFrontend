@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { calcularDelta, calcularRaizes } from './Bhaskara';
+import { calcularRaizes } from './Bhaskara';
+import { Button, Card, Form } from 'react-bootstrap';
 
 function App() {
   const [a, setA] = useState('');
@@ -28,37 +29,49 @@ function App() {
       return <p>Existem duas raízes iguais: {raizes[0]}</p>;
     } else {
       return (
-        <p>
-          Existem duas raízes reais diferentes: {raizes[0]} e {raizes[1]}
-        </p>
+        <>
+        <p> Existem duas raízes reais diferentes: </p>
+          <ul>
+            {raizes.map((raiz, index) => (
+              <li key={index}>{raiz}</li>
+            ))}
+          </ul>
+          </>
       );
     }
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <label>
-          a:
-          <input type="number" name="a" value={a} onChange={handleInputChange} />
-        </label>
-        <label>
-          b:
-          <input type="number" name="b" value={b} onChange={handleInputChange} />
-        </label>
-        <label>
-          c:
-          <input type="number" name="c" value={c} onChange={handleInputChange} />
-        </label>
-        <button type="submit">Calcular</button>
-      </form>
+    <Card style={{ width: '18rem',  margin: '10px' }}>
+      <Card.Body>
+        <h3>Cáculo Bhaskara</h3>
+      <Card.Title>
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="formA">
+          <Form.Label>a:</Form.Label>
+          <Form.Control type="number" name="a" value={a} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group controlId="formB">
+          <Form.Label>b:</Form.Label>
+          <Form.Control type="number" name="b" value={b} onChange={handleInputChange} />
+        </Form.Group>
+        <Form.Group controlId="formC">
+          <Form.Label>c:</Form.Label>
+          <Form.Control type="number" name="c" value={c} onChange={handleInputChange} />
+        </Form.Group>
+        <Button variant="primary" type="submit">Calcular</Button>
+      </Form>
+      </Card.Title>
+      <Card.Text>
       {raizes.length > 0 && (
         <div>
           <p>Raízes:</p>
           {renderRaizes()}
         </div>
       )}
-    </div>
+      </Card.Text>
+      </Card.Body>
+    </Card>
   );
 }
 

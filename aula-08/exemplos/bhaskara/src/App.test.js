@@ -14,7 +14,7 @@ test('calculates roots correctly', () => {
   expect(calcularRaizes(1, 2, 1)).toEqual([-1]);
   expect(calcularRaizes(1, -5, 6)).toEqual([3, 2]);
   expect(calcularRaizes(2, -7, 3)).toEqual([3, 0.5]);
-  expect(calcularRaizes(1, 3, 4)).toEqual([]);
+  expect(calcularRaizes(1, 3, 4)).toEqual(["na"]);
 });
 
 test('renders form and calculates roots on submit', () => {
