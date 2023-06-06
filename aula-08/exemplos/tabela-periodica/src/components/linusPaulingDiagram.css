@@ -1,0 +1,69 @@
+.diagram {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .layer {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .shell {
+    font-weight: bold;
+    margin-right: 10px;
+  }
+  
+  .sublevels {
+    display: flex;
+    gap: 1px;
+  }
+  
+  .electron {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin: 2px;
+  }
+
+  .electron-value {
+    position: absolute;
+    bottom: 6px;
+    left: 40%;
+    transform: translateX(-60%);
+    font-size: 10px;
+    color: #000;
+  }
+  .s {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #2196f3; /* Azul */
+  }
+  
+  .p {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #ff9800; /* Laranja */
+  }
+  
+  .d {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #4caf50; /* Verde */
+  }
+  
+  .f {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background-color: #f44336; /* Vermelho */
+  }
+  

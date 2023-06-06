@@ -1,0 +1,198 @@
+/* Estilos para a tabela periódica */
+.tabela-periodica {
+    display: flex;
+    flex-wrap: wrap;
+    grid-template-columns: repeat(18, 1fr);
+    gap: 1px;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  /* Estilos para cada elemento */
+  .elemento {
+    display: flex;
+    width: calc(10% - 10px); /* Ajuste a largura conforme necessário */
+    margin: 2px; /* Espaçamento entre os elementos */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #eeecec00;
+    border: 0px solid #0d0c0c;
+    padding: 1px;
+    text-align: center;
+  }
+  
+  .atomic-number {
+    font-weight: bold;
+    font-size: 18px;
+  }
+  
+  .symbol {
+    font-size: 22px;
+  }
+  
+  .name {
+    margin-top: 5px;
+    font-size: 14px;
+  }
+  
+  .atomic-mass {
+    margin-top: 5px;
+    font-size: 12px;
+  }
+  
+  /* Estilos para celular */
+@media (max-width: 480px) {
+    .elemento {
+      width: calc(25% - 10px);
+    }
+  
+    .symbol {
+      font-size: 14px;
+    }
+  
+    .name {
+      display: none; /* Oculta o elemento .name em dispositivos móveis */
+    }
+  
+    .atomic-mass {
+      font-size: 10px;
+    }
+  }
+
+  .nova-linha {
+    clear: both;
+  }
+
+  /* Estilos para gases nobres */
+.gases-nobres {
+    background-color: #A0D8FF;
+    color: #333;
+    font-weight: bold;
+  }
+  
+  .gases-nobres:hover {
+    background-color: #8AC6E2;
+    cursor: pointer;
+  }
+
+  /* Estilos para os metais alcalinos */
+.metais-alcalinos {
+    background-color: #f7c8a8;
+    color: #333;
+    font-weight: bold;
+  }
+
+.metais-alcalinos:hover {
+    background-color: #f8a772;
+    cursor: pointer;
+  }
+  
+/* Estilos para os metaloids */
+.metaloides {
+    background-color: #faf6d3; /* Cor de fundo */
+    color: #000; /* Cor do texto */
+    font-weight: bold;
+  }
+  
+.metaloides:hover {
+    background-color: #f5e280;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+  }
+
+  /* Estilos para os metais alcalino-terrosos */
+.metais-alcalino-terrosos {
+    background-color: #FFEA00; /* Cor de fundo */
+    color: #000; /* Cor do texto */
+    font-weight: bold;
+  }
+  
+.metais-alcalino-terrosos:hover {
+    background-color: #FDD835;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+  }
+
+  /* Estilos para metais de transição */
+.metais-de-transicao {
+    background-color: #c0c0c0;
+    color: #000;
+    font-weight: bold;
+}
+  
+.metais-de-transicao:hover {
+    background-color: #959595;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+  }
+
+  
+    /* Estilos para lantanideos */
+.lantanideos {
+    background-color: #dddddd;
+    color: #000;
+    font-weight: bold;
+}
+  
+.lantanideos:hover {
+    background-color: #d3d3d3;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+  }
+
+  /* Estilos para actinideos */
+.actinideos {
+    background-color: #ffcccc;
+    color: #000;
+    font-weight: bold;
+}
+  
+.actinideos:hover {
+    background-color: #ffb1b1;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+  }
+/* Estilos para não metais */
+.nao-metais {
+    background-color: #7e896b;
+    color: #000;
+    font-weight: bold;
+}
+  
+.nao-metais:hover {
+    background-color: #a3ba7b;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+}
+
+/* Estilos para outros metais */
+.outros-metais {
+    background-color: #f54a75;
+    color: #000;
+    font-weight: bold;
+}
+  
+.outros-metais:hover {
+    background-color: #dc728d;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+}
+
+/* Estilos para halogenios*/
+.halogenios {
+    background-color: #e9c6a2;
+    color: #000;
+    font-weight: bold;
+}
+  
+.halogenios:hover {
+    background-color: #cd9e70;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+}
+
+/* Estilos para halogenios*/
+.halogenios {
+    background-color: #e9c6a2;
+    color: #000;
+    font-weight: bold;
+}
+  
+.halogenios:hover {
+    background-color: #cd9e70;/* Cor de fundo ao passar o mouse */
+    cursor: pointer;
+}
