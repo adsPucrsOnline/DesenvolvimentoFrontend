@@ -44,8 +44,8 @@ app.get('/postcards/:id', (req, res) => {
 });
 // Rota POST para adicionar um novo Postcard
 app.post('/postcards', (req, res) => {
-  const { name, cidade, pais, descricao } = req.body;
-  const imageUrl = `https://picsum.photos/400/300`; // Gerador automático de imagens
+  const { name, cidade, pais, descricao, imageUrl } = req.body;
+  //const imageUrl = `https://picsum.photos/400/300`; // Gerador automático de imagens
 
   const newPostcard = {
     id: uuidv4(),
@@ -75,6 +75,40 @@ app.post('/postcards', (req, res) => {
     });
   });
 });
+
+app.put('/postcards/:id', (req, res) => {
+  const { id } = req.params;
+  const { name, cidade, pais, descricao } = req.body;
+
+  fs.readFile(postcardsPath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to read postcards data.' });
+    }
+
+    const postcards = JSON.parse(data);
+    const postcard = postcards.find((item) => item.id === id);
+
+    if (!postcard) {
+      return res.status(404).json({ error: 'Postcard not found.' });
+    }
+
+    postcard.name = name;
+    postcard.cidade = cidade;
+    postcard.pais = pais;
+    postcard.descricao = descricao;
+
+    fs.writeFile(postcardsPath, JSON.stringify(postcards, null, 2), (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Failed to update postcard.' });
+      }
+
+      res.json(postcard);
+    });
+  });
+});
+
 
 const PORT = 5000;
 app.listen(PORT, () => {

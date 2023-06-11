@@ -1,27 +1,29 @@
-import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import usePostcards from "../../hooks/usePostcards";
-import { Box, TextField, Button, Card, CardMedia } from "@mui/material";
-import { Typography, CircularProgress } from "@mui/material";
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { Box, TextField, Button, Card, CardMedia } from '@mui/material';
+import { Typography } from '@mui/material';
+import usePostcards from '../../hooks/usePostcardApi';
 
 const PostcardEdit = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
-  const { data, loading, error } = usePostcards(
-    `http://localhost:5000/postcards/${parseInt(id)}`
-  );
+  const { getPostcard, updatePostcard } = usePostcards();
+  const [postcard, setPostcard] = useState(null);
 
-  const [postcard, setPostcard] = useState(data);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const postcardData = await getPostcard(String(id));
+        console.log(" ---> ", postcardData)
+        setPostcard(postcardData);
+      } catch (error) {
+        console.log('Error fetching postcard:', error);
+      }
+    };
 
-  if (loading) {
-    console.log(data, loading)
-    return <CircularProgress />;
-  }
-
-  if (error) {
-    return <Typography variant="body1">{error}</Typography>;
-  }
+    fetchData();
+  }, [getPostcard, id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -31,9 +33,14 @@ const PostcardEdit = () => {
     }));
   };
 
-  const handleSaveClick = () => {
-    setIsSaved(true);
-    navigate("/list");
+  const handleSaveClick = async () => {
+    try {
+      await updatePostcard(postcard);
+      setIsSaved(true);
+      navigate('/list');
+    } catch (error) {
+      console.log('Error saving postcard:', error);
+    }
   };
 
   if (!postcard) {
@@ -43,20 +50,18 @@ const PostcardEdit = () => {
   return (
     <Box marginTop={1}>
       <form>
-      {postcard && (
-        <>
         <TextField
           label="Nome"
           name="name"
-          value={data.name}
-          onChange={handleInputChange}
+          value={postcard.name}
+          //onChange={handleInputChange}
           fullWidth
           margin="normal"
         />
         <TextField
           label="Cidade"
           name="cidade"
-          value={data.cidade}
+          value={postcard.cidade}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
@@ -64,7 +69,7 @@ const PostcardEdit = () => {
         <TextField
           label="País"
           name="pais"
-          value={data.pais}
+          value={postcard.pais}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
@@ -72,34 +77,26 @@ const PostcardEdit = () => {
         <TextField
           label="Descrição"
           name="descricao"
-          value={data.descricao}
+          value={postcard.descricao}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
         />
-        {/* <TextField
+        <TextField
           label="Imagem URL"
           name="imageUrl"
-          value={data.imageUrl}
+          value={postcard.imageUrl}
           onChange={handleInputChange}
           fullWidth
           margin="normal"
-        /> */}
-      <Card sx={{ maxWidth: 345 }}>
-      <CardMedia
-        sx={{ height: 140 }}
-        image={data.imageUrl}
-        title={data.name}
-      />
-    </Card>
-  
+        />
+        <Card sx={{ maxWidth: 345 }}>
+          <CardMedia sx={{ height: 140 }} image={postcard.imageUrl} title={postcard.name} />
+        </Card>
 
-       </>
-        )}
         <Button variant="contained" color="primary" onClick={handleSaveClick}>
           Salvar
         </Button>
-    
       </form>
     </Box>
   );
