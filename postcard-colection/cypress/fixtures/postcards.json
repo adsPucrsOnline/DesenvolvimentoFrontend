@@ -1,0 +1,26 @@
+[
+    {
+        "id": "0980d24a-b392-4ed2-a33a-7c76b124b98d",
+        "name": "Postcard 1",
+        "cidade": "Cidade 1",
+        "pais": "País 1",
+        "descricao": "Descrição 1",
+        "imageUrl": "https://i.pinimg.com/originals/15/f3/3f/15f33f9ff680c4439d54e50d8e35a2cf.png"
+      },
+      {
+        "id": "0980d24a-b392-4ed2-a33a-7c76b125b98d",
+        "name": "Postcard 2",
+        "cidade": "Cidade 2",
+        "pais": "País 2",
+        "descricao": "Descrição 2",
+        "imageUrl": "https://i.pinimg.com/originals/15/f3/3f/15f33f9ff680c4439d54e50d8e35a2cf.png"
+      },
+          {
+        "id": "0980d24a-b392-4ed2-a33a-7c76b126b98d",
+        "name": "Postcard 3",
+        "cidade": "Cidade 3",
+        "pais": "País 3",
+        "descricao": "Descrição 3",
+        "imageUrl": "https://i.pinimg.com/originals/15/f3/3f/15f33f9ff680c4439d54e50d8e35a2cf.png"
+      }
+]

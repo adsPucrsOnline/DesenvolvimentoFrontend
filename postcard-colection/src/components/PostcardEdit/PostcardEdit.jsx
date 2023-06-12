@@ -10,20 +10,25 @@ const PostcardEdit = () => {
   const [isSaved, setIsSaved] = useState(false);
   const { getPostcard, updatePostcard } = usePostcards();
   const [postcard, setPostcard] = useState(null);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const postcardData = await getPostcard(String(id));
-        console.log(" ---> ", postcardData)
-        setPostcard(postcardData);
+        if (!isDataLoaded) {
+          const postcardData = await getPostcard(String(id));
+          console.log(" ---> ", postcardData)
+          setPostcard(postcardData);
+          setIsDataLoaded(true);
+        }
       } catch (error) {
         console.log('Error fetching postcard:', error);
       }
     };
-
+  
     fetchData();
-  }, [getPostcard, id]);
+  }, [isDataLoaded, getPostcard, id]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -39,7 +44,7 @@ const PostcardEdit = () => {
       setIsSaved(true);
       navigate('/list');
     } catch (error) {
-      console.log('Error saving postcard:', error);
+      console.log('Error saving postcard:', error, isSaved);
     }
   };
 
@@ -54,7 +59,7 @@ const PostcardEdit = () => {
           label="Nome"
           name="name"
           value={postcard.name}
-          //onChange={handleInputChange}
+          onChange={handleInputChange}
           fullWidth
           margin="normal"
         />

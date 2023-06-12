@@ -78,7 +78,7 @@ app.post('/postcards', (req, res) => {
 
 app.put('/postcards/:id', (req, res) => {
   const { id } = req.params;
-  const { name, cidade, pais, descricao } = req.body;
+  const { name, cidade, pais, descricao, imageUrl } = req.body;
 
   fs.readFile(postcardsPath, 'utf8', (err, data) => {
     if (err) {
@@ -97,6 +97,7 @@ app.put('/postcards/:id', (req, res) => {
     postcard.cidade = cidade;
     postcard.pais = pais;
     postcard.descricao = descricao;
+    postcard.imageUrl = imageUrl;
 
     fs.writeFile(postcardsPath, JSON.stringify(postcards, null, 2), (err) => {
       if (err) {
@@ -108,6 +109,36 @@ app.put('/postcards/:id', (req, res) => {
     });
   });
 });
+
+app.delete('/postcards/:id', (req, res) => {
+  const { id } = req.params;
+
+  fs.readFile(postcardsPath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Failed to read postcards data.' });
+    }
+
+    let postcards = JSON.parse(data);
+    const postcardIndex = postcards.findIndex((item) => item.id === id);
+
+    if (postcardIndex === -1) {
+      return res.status(404).json({ error: 'Postcard not found.' });
+    }
+
+    postcards = postcards.filter((item) => item.id !== id);
+
+    fs.writeFile(postcardsPath, JSON.stringify(postcards, null, 2), (err) => {
+      if (err) {
+        console.error(err);
+        return res.status(500).json({ error: 'Failed to delete postcard.' });
+      }
+
+      res.status(204).end();
+    });
+  });
+});
+
 
 
 const PORT = 5000;

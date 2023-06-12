@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from 'axios';
 import usePostcards from "../../hooks/usePostcards";
-import { Box, TextField, Button, CircularProgress, Typography } from "@mui/material";
+import { Box, TextField, Button } from "@mui/material";
+
 
 const PostcardAdd = () => {
   const navigate = useNavigate();
   const [isSaved, setIsSaved] = useState(false);
-  const { data, loading, error } = usePostcards(
-    `http://localhost:5000/postcards/1`
+  const { data } = usePostcards(
+    `http://localhost:5000/postcards/`
   );
 
   const [postcard, setPostcard] = useState(data || {
@@ -36,7 +37,7 @@ const PostcardAdd = () => {
         navigate("/list");
       })
       .catch((error) => {
-        // Lida com erros ao salvar o postcard
+        console.log(isSaved);
       });
 
     // Como exemplo, estou apenas definindo a variável isSaved como true e navegando para a lista
