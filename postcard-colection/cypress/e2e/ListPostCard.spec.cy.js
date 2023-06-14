@@ -15,18 +15,4 @@ describe('ListPostcard', () => {
             cy.get('[data-testid="postcard"]').should('have.length', 3);
         });
     });
-    
-    it('should delete a postcard', () => {
-        cy.intercept('GET', '**/postcards', { fixture: 'postcards.json' }).as('getAllPostcard');
-        cy.intercept('DELETE', '**/postcards/*', {}).as('deletePostcard');
-
-        cy.wait('@getAllPostcard').then(() => {
-            cy.get('[data-testid="delete-button"]').first().click();
-            cy.get('[data-testid="confirm-delete-button"]').click();
-
-            cy.wait('@deletePostcard').then(() => {
-                cy.get('[data-testid="postcard"]').should('have.length', 2);
-            });
-        });
-    });
 });

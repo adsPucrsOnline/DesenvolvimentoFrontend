@@ -1,52 +1,48 @@
-import React, { useEffect } from 'react';
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/messaging';
-
-// Configuração do Firebase
-const firebaseConfig = {
-  // Coloque aqui o objeto de configuração do Firebase que você recebeu ao criar seu projeto
-  apiKey: "AIzaSyBPiVNT-o46ZwcoYMSvVcSTejgOYXKspRA",
-  authDomain: "send-msg-exemplo.firebaseapp.com",
-  projectId: "send-msg-exemplo",
-  storageBucket: "send-msg-exemplo.appspot.com",
-  messagingSenderId: "174129517195",
-  appId: "1:174129517195:web:dc58b09c83a564f9be7a8e"
-};
-
-// Inicialização do Firebase
-firebase.initializeApp(firebaseConfig);
+import logo from './logo.svg';
+import './App.css';
+import { useState, useEffect } from 'react';
+import { Button, Row, Col, Toast } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {getTokenMsg} from './firebase';
 
 function App() {
+
+  const [show, setShow] = useState(false);
+  const [isTokenFound, setTokenFound] = useState(false);
+
   useEffect(() => {
-    const messaging = firebase.messaging();
-
-    // Solicitar permissão para receber notificações push
-    messaging
-      .requestPermission()
-      .then(() => {
-        console.log('Permissão de notificação concedida.');
-
-        // Obter o token do dispositivo para enviar notificações
-        return messaging.getToken();
-      })
-      .then((token) => {
-        console.log('Token do dispositivo:', token);
-
-        // Enviar o token para o seu backend para associá-lo ao usuário
-      })
-      .catch((error) => {
-        console.error('Erro ao solicitar permissão de notificação:', error);
-      });
-
-    // Tratar a chegada de uma notificação quando o aplicativo está em primeiro plano
-    messaging.onMessage((payload) => {
-      console.log('Notificação recebida:', payload);
-    });
+    getTokenMsg(setTokenFound);
   }, []);
 
   return (
-    <div>
-      <h1>Exemplo de Notificações Push com Firebase</h1>
+    <div className="App">
+      
+      <Toast onClose={() => setShow(false)} show={show} delay={3000} autohide animation style={{
+        position: 'absolute',
+        top: 20,
+        right: 20,
+      }}>
+        <Toast.Header>
+          <img
+            src="holder.js/20x20?text=%20"
+            className="rounded mr-2"
+            alt=""
+          />
+          <strong className="mr-auto">Notificações</strong>
+          <small>12 mins ago</small>
+        </Toast.Header>
+        <Toast.Body>Existem algumas novas atualizações que você pode adorar!!</Toast.Body>
+      </Toast>
+      <header className="App-header">
+      {isTokenFound &&
+        'Prmissão de notificação Habilitada👍🏻 '
+      }
+      {!isTokenFound &&
+        'Precisa de permissão de notificação ❗️'
+      }
+        <img src={logo} className="App-logo" alt="logo" />
+        <Button onClick={() => setShow(true)}>Show Toast</Button>
+      </header>
     </div>
   );
 }
