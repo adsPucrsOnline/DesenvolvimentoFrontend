@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Box, Container, Typography, FormControl, Select, MenuItem } from '@mui/material';
 import axios from 'axios';
-import {KEY_API_CLIMA} from '../../util/constantes'
+import { KEY_API_CLIMA } from '../../util/constantes';
 
 const Clima = () => {
   const [states, setStates] = useState([]);
   const [selectedState, setSelectedState] = useState('');
+  const [cities, setCities] = useState([]);
+  const [selectedCity, setSelectedCity] = useState('');
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
-    // Função para buscar a lista de estados a partir de uma API
     const fetchStates = async () => {
       try {
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados'); // Substitua pelo URL da API de estados
+        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
         const data = await response.json();
         setStates(data);
       } catch (error) {
@@ -23,80 +24,99 @@ const Clima = () => {
     fetchStates();
   }, []);
 
-  const handleStateChange = async (event) => {
+  useEffect(() => {
+    const fetchCities = async () => {
+      try {
+        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedState}/municipios`);
+        const data = await response.json();
+        setCities(data);
+      } catch (error) {
+        console.error('Erro ao buscar as cidades:', error);
+      }
+    };
+
+    fetchCities();
+  }, [selectedState]);
+
+  const handleStateChange = (event) => {
     setSelectedState(event.target.value);
-    console.log(event)
-    try {
-    //   const response = await fetch(`https://api.example.com/weather?state=${event.target.value}`); // Substitua pelo URL da API de previsão do tempo
-    //   const data = await response.json();
-    const data =  {
-        state: event.target.name,
-        temperature: 25,
-        condition: 'Ensolarado',
-    }
-      setWeather(data);
-    
-    } catch (error) {
-      console.error('Erro ao buscar a previsão do tempo:', error);
-    }
+    setSelectedCity(''); // Limpar a seleção da cidade ao trocar o estado
   };
 
-  // Chame essa função no local adequado, por exemplo, no useEffect
-// const fetchWeatherData = () => {
-//     const apiKey = KEY_API_CLIMA;
-//     const city = 'Porto Alegre';
-//     const state = 'RS';
-  
-//     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${state},BR&appid=${apiKey}`;
-  
-//     axios
-//       .get(apiUrl)
-//       .then((response) => {    
-//         setWeather(response.data);
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-  
-//   // Chame a função fetchWeatherData para fazer a chamada à API
-//   fetchWeatherData();
-  
+  const handleCityChange = (event) => {
+    setSelectedCity(event.target.value);
+    fetchWeatherData(event.target.value); // Buscar a previsão do tempo da cidade selecionada
+  };
+
+  const fetchWeatherData = (city) => {
+    const apiKey = KEY_API_CLIMA;
+    const state = selectedState;
+
+    const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${state},BR&appid=${apiKey}`;
+    console.log(apiUrl); 
+    axios
+      .get(apiUrl)
+      .then((response) => {
+        console.log("DATA --> ", response.data)
+        setWeather(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
 
   return (
     <Card sx={{ padding: '16px', margin: '8px' }}>
-    <Container maxWidth="sm">
-      <Typography variant="h4" color="primary" align="center" gutterBottom>
-        Previsão do Tempo
-      </Typography>
+      <Container maxWidth="sm">
+        <Typography variant="h4" color="primary" align="center" gutterBottom>
+          Previsão do Tempo
+        </Typography>
 
-      <FormControl fullWidth>
-        <Select value={selectedState} onChange={handleStateChange} displayEmpty>
-          <MenuItem value="" disabled>
-            Selecione o estado
-          </MenuItem>
-          {states.map((state) => (
-            <MenuItem key={state.id} value={state.id} name={state.nome}>
-              {state.nome}
+        <FormControl fullWidth>
+          <Select value={selectedState} onChange={handleStateChange} displayEmpty>
+            <MenuItem value="" disabled>
+              Selecione o estado
             </MenuItem>
-          ))}
-        </Select>
-      </FormControl>
+            {states.map((state) => (
+              <MenuItem key={state.id} value={state.id}>
+                {state.nome}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
 
-      {weather && (
-        <Box bgcolor="lightgrey" p={2} mb={2}>
-          <Typography variant="h6" gutterBottom>
-            Estado {weather.state}
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Temperatura: {weather.temperature}°C
-          </Typography>
-          <Typography variant="body1" gutterBottom>
-            Condição: {weather.condition}
-          </Typography>
-        </Box>
-      )}
-    </Container>
+        {selectedState && (
+          <FormControl fullWidth>
+            <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
+              <MenuItem value="" disabled>
+                Selecione a cidade
+              </MenuItem>
+              {cities.map((city) => (
+                <MenuItem key={city.id} value={city.nome}>
+                  {city.nome}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        )}
+
+        {weather && (
+          <Box bgcolor="lightgrey" p={2} mb={2}>
+            <Typography variant="h6" gutterBottom>
+              Estado: {selectedState}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Cidade: {selectedCity}
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Temperatura: {weather.main.temp}°C
+            </Typography>
+            <Typography variant="body1" gutterBottom>
+              Condição: {weather.weather[0].description}
+            </Typography>
+          </Box>
+        )}
+      </Container>
     </Card>
   );
 };
