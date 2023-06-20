@@ -1,23 +1,33 @@
-import React, { useState, useEffect } from 'react';
-import { Card, Box, Container, Typography, FormControl, Select, MenuItem } from '@mui/material';
-import axios from 'axios';
-import { KEY_API_CLIMA } from '../../util/constantes';
+import React, { useState, useEffect } from "react";
+import {
+  Card,
+  Box,
+  Container,
+  Typography,
+  FormControl,
+  Select,
+  MenuItem,
+} from "@mui/material";
+import axios from "axios";
+import { KEY_API_CLIMA } from "../../util/constantes";
 
 const Clima = () => {
   const [states, setStates] = useState([]);
-  const [selectedState, setSelectedState] = useState('');
+  const [selectedState, setSelectedState] = useState("");
   const [cities, setCities] = useState([]);
-  const [selectedCity, setSelectedCity] = useState('');
+  const [selectedCity, setSelectedCity] = useState("");
   const [weather, setWeather] = useState(null);
 
   useEffect(() => {
     const fetchStates = async () => {
       try {
-        const response = await fetch('https://servicodados.ibge.gov.br/api/v1/localidades/estados');
+        const response = await fetch(
+          "https://servicodados.ibge.gov.br/api/v1/localidades/estados"
+        );
         const data = await response.json();
         setStates(data);
       } catch (error) {
-        console.error('Erro ao buscar os estados:', error);
+        console.error("Erro ao buscar os estados:", error);
       }
     };
 
@@ -27,11 +37,13 @@ const Clima = () => {
   useEffect(() => {
     const fetchCities = async () => {
       try {
-        const response = await fetch(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedState}/municipios`);
+        const response = await fetch(
+          `https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedState}/municipios`
+        );
         const data = await response.json();
         setCities(data);
       } catch (error) {
-        console.error('Erro ao buscar as cidades:', error);
+        console.error("Erro ao buscar as cidades:", error);
       }
     };
 
@@ -40,7 +52,7 @@ const Clima = () => {
 
   const handleStateChange = (event) => {
     setSelectedState(event.target.value);
-    setSelectedCity(''); // Limpar a seleção da cidade ao trocar o estado
+    setSelectedCity(""); // Limpar a seleção da cidade ao trocar o estado
   };
 
   const handleCityChange = (event) => {
@@ -53,11 +65,11 @@ const Clima = () => {
     const state = selectedState;
 
     const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city},${state},BR&appid=${apiKey}`;
-    console.log(apiUrl); 
+    console.log(apiUrl);
     axios
       .get(apiUrl)
       .then((response) => {
-        console.log("DATA --> ", response.data)
+        console.log("DATA --> ", response.data);
         setWeather(response.data);
       })
       .catch((error) => {
@@ -66,14 +78,18 @@ const Clima = () => {
   };
 
   return (
-    <Card sx={{ padding: '16px', margin: '8px' }}>
+    <Card sx={{ padding: "16px", margin: "8px" }}>
       <Container maxWidth="sm">
         <Typography variant="h4" color="primary" align="center" gutterBottom>
           Previsão do Tempo
         </Typography>
 
         <FormControl fullWidth>
-          <Select value={selectedState} onChange={handleStateChange} displayEmpty>
+          <Select
+            value={selectedState}
+            onChange={handleStateChange}
+            displayEmpty
+          >
             <MenuItem value="" disabled>
               Selecione o estado
             </MenuItem>
@@ -87,7 +103,11 @@ const Clima = () => {
 
         {selectedState && (
           <FormControl fullWidth>
-            <Select value={selectedCity} onChange={handleCityChange} displayEmpty>
+            <Select
+              value={selectedCity}
+              onChange={handleCityChange}
+              displayEmpty
+            >
               <MenuItem value="" disabled>
                 Selecione a cidade
               </MenuItem>
@@ -102,17 +122,18 @@ const Clima = () => {
 
         {weather && (
           <Box bgcolor="lightgrey" p={2} mb={2}>
-            <Typography variant="h6" gutterBottom>
-              Estado: {selectedState}
-            </Typography>
-            <Typography variant="body1" gutterBottom>
-              Cidade: {selectedCity}
-            </Typography>
             <Typography variant="body1" gutterBottom>
               Temperatura: {weather.main.temp}°C
             </Typography>
             <Typography variant="body1" gutterBottom>
               Condição: {weather.weather[0].description}
+            </Typography>
+          </Box>
+        )}
+        {!weather && (
+          <Box bgcolor="red" p={2} mb={2}>
+            <Typography variant="h6" gutterBottom>
+              API Weather fora do Ar ou sem dados da localização!
             </Typography>
           </Box>
         )}
