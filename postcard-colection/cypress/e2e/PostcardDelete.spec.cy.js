@@ -1,4 +1,4 @@
-describe('ListPostcard', () => {
+describe('Delete Postcard', () => {
   beforeEach(() => {
       cy.intercept('GET', '**/postcards', { fixture: 'postcards.json' }).as('getAllPostcard');
       cy.visit('http://localhost:3000/list', {

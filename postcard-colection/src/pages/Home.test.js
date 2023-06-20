@@ -7,7 +7,8 @@ describe('Home', () => {
     render(<Home />);
 
     const titleElement = screen.getByText('Postcar');
-    const messageElement = screen.getByText('Bem-vindo a nossa Coleção!');
+    const subtitleElement = screen.getByText('Coleção de Cartões Postais');
+    const messageElement = screen.getByText('Bem-vindo!');
 
     expect(titleElement).toBeInTheDocument();
     expect(messageElement).toBeInTheDocument();

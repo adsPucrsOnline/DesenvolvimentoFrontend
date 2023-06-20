@@ -5,6 +5,9 @@
 		},
 		{
 			"path": "aula-09/exemplos/notificacao/app-push"
+		},
+		{
+			"path": "aula-09/exemplos/notificacao/app-push-v2"
 		}
 	],
 	"settings": {}

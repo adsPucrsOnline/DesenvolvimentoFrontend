@@ -22,5 +22,13 @@
     "pais": "Espanha",
     "descricao": "Sagrada",
     "imageUrl": "https://cdn.getyourguide.com/img/tour/62053657625bc.jpeg/98.jpg"
+  },
+  {
+    "id": "0abd6830-08a5-47d5-b7c3-8dafbfc13ea6",
+    "name": "Cidade de Bariloche",
+    "cidade": "Braliloche",
+    "pais": "Argentina",
+    "descricao": "Lagos gelados",
+    "imageUrl": "https://media.gettyimages.com/id/154945245/pt/foto/patag%C3%B4nia.jpg?s=612x612&w=gi&k=20&c=LHxFJdjn8Telj3MG1BvdVACSa3EiqI48RxR9PrCUZDM="
   }
 ]
