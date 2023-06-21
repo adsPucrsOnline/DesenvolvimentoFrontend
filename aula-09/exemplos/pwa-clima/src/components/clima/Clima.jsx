@@ -123,7 +123,7 @@ const Clima = () => {
         {weather && (
           <Box bgcolor="lightgrey" p={2} mb={2}>
             <Typography variant="body1" gutterBottom>
-              Temperatura: {weather.main.temp}°C
+              Temperatura: {(weather.main.temp - 273.15).toFixed(2)}°C
             </Typography>
             <Typography variant="body1" gutterBottom>
               Condição: {weather.weather[0].description}
