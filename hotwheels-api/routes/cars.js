@@ -37,8 +37,9 @@ router.post('/', (req, res) => {
       const cars = JSON.parse(data); // Transforma o conteúdo em um objeto JavaScript
       const newCar = req.body; // Obtém o novo objeto de carro a partir do corpo da requisição
 
+      const newId = cars.length + 1;
       // Adiciona o novo carro ao array de carros
-      cars.push(newCar);
+      cars.push({ id: newId, ...newCar });
 
       // Escreve o novo conteúdo no arquivo JSON
       fs.writeFile(filePath, JSON.stringify(cars), 'utf8', (err) => {
@@ -68,23 +69,53 @@ router.delete('/:id', (req, res) => {
 
     let carsData = JSON.parse(data);
 
-    // Procura o carro pelo ID
-    const carIndex = carsData.findIndex(car => car.id === carId);
-    if (carIndex === -1) {
-      return res.status(404).json({ message: 'Car not found' });
-    }
-
     // Remove o carro do array
-    carsData.splice(carIndex, 1);
+    const newCarsData = carsData.filter(car => car.id !== carId);
 
     // Escreve os dados atualizados no arquivo JSON
-    fs.writeFile(filePath, JSON.stringify(carsData), err => {
+    fs.writeFile(filePath, JSON.stringify(newCarsData), err => {
       if (err) {
         return res.status(500).json({ message: 'Internal server error' });
       }
 
       res.json({ message: 'Car removed successfully' });
     });
+  });
+});
+
+// Rota PUT para atualizar um carro
+router.put('/', (req, res) => {
+  fs.readFile(filePath, 'utf8', (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Erro ao ler arquivo JSON' });
+    }
+
+    try {
+      const cars = JSON.parse(data); // Transforma o conteúdo em um objeto JavaScript
+      const updatedCar = req.body; // Obtém o novo objeto de carro a partir do corpo da requisição
+
+      if (cars.some(car => updatedCar.id === car.id)) {
+        // Atualiza a lista de carros com o novo dado
+        const updatedCars = cars.map(car => (updatedCar.id === car.id ? updatedCar : car))
+
+        // Escreve o novo conteúdo no arquivo JSON
+        fs.writeFile(filePath, JSON.stringify(updatedCars), 'utf8', (err) => {
+          if (err) {
+            console.error(err);
+            return res.status(500).json({ error: 'Erro ao escrever arquivo JSON' });
+          }
+
+          res.json(updatedCar); // Retorna o carro atualizado como resposta
+        });
+      } else  {
+        return res.status(404).json({ error: 'Car not found' });
+      }
+ 
+    } catch (err) {
+      console.error(err);
+      return res.status(500).json({ error: 'Erro ao analisar arquivo JSON' });
+    }
   });
 });
 
