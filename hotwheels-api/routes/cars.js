@@ -37,7 +37,8 @@ router.post('/', (req, res) => {
       const cars = JSON.parse(data); // Transforma o conteúdo em um objeto JavaScript
       const newCar = req.body; // Obtém o novo objeto de carro a partir do corpo da requisição
 
-      const newId = cars.length + 1;
+      const carsLength = cars.length;
+      const newId = carsLength ? cars[carsLength -1].id + 1 : 1;
       // Adiciona o novo carro ao array de carros
       cars.push({ id: newId, ...newCar });
 
