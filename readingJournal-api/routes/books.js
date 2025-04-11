@@ -32,13 +32,11 @@ router.post("/", (req, res) => {
     }
 
     try {
-      const books = JSON.parse(data); // Transforma o conteúdo em um objeto JavaScript
-      const newBook = req.body; // Obtém o novo objeto de livro a partir do corpo da requisição
-
+      const books = JSON.parse(data);
       const booksLength = books.length;
       const newId = booksLength ? books[booksLength - 1].id + 1 : 1;
-      // Adiciona o novo livro ao array de livros
-      books.push({ id: newId, ...newBook });
+      const newBook = { ...req.body, id: newId };
+      books.push(newBook);
 
       // Escreve o novo conteúdo no arquivo JSON
       fs.writeFile(filePath, JSON.stringify(books), "utf8", (err) => {
