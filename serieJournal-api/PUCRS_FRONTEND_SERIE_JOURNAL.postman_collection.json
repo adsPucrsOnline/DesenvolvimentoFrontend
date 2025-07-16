@@ -1,0 +1,125 @@
+{
+	"info": {
+		"_postman_id": "7d3b9add-c019-4043-9fab-be26ce1c92cb",
+		"name": "PUCRS_FRONTEND_SERIE_JOURNAL",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "16347096"
+	},
+	"item": [
+		{
+			"name": "listar series",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/series",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "exibir serie por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/series/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"series",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "adicionar serie",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"title\": \"Teste12\",\n    \"seasons\": 4,\n    \"releaseDate\": \"2015-01-20\",\n    \"director\": \"Vince Gilligan\",\n    \"production\": \"AMC\",\n    \"category\": \"Ficção\",\n    \"watchedAt\": \"2023-03-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/series",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar serie",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": 11,\n    \"title\": \"Teste123\",\n    \"seasons\": 4,\n    \"releaseDate\": \"2015-01-20\",\n    \"director\": \"Vince Gilligan\",\n    \"production\": \"AMC\",\n    \"category\": \"Ficção\",\n    \"watchedAt\": \"2023-03-10\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/series",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"series"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "remover serie por id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/series/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"series",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
