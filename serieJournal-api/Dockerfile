@@ -10,7 +10,7 @@ COPY . /app
 # Instale as dependências do Node.js
 RUN npm install
 
-# Expõe a porta 3000 para acesso externo
+# Expõe a porta 5000 para acesso externo
 EXPOSE 5000
 
 # Inicie a aplicação com o comando "node app.js" quando o container for executado
